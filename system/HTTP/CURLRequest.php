@@ -509,6 +509,12 @@ class CURLRequest extends OutgoingRequest
             }
         }
 
+        // Proxy
+        if (!empty($config['proxy'])) {
+            $proxy = $config['proxy'];
+            $curlOptions[CURLOPT_PROXY] = $proxy;
+        }
+
         // Certificate
         if (! empty($config['cert'])) {
             $cert = $config['cert'];

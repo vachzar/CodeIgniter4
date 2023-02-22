@@ -1008,4 +1008,18 @@ Transfer-Encoding: chunked\x0d\x0a\x0d\x0a<title>Update success! config</title>"
         $this->assertArrayHasKey(CURLOPT_USERAGENT, $options);
         $this->assertSame($agent, $options[CURLOPT_USERAGENT]);
     }
+
+    public function testProxyOption()
+    {
+        $proxy = 'http://user:pass@proxy.com:80';
+
+        $this->request->request('POST', '/post', [
+            'proxy' => $proxy,
+        ]);
+
+        $options = $this->request->curl_options;
+
+        $this->assertArrayHasKey(CURLOPT_PROXY, $options);
+        $this->assertSame($proxy, $options[CURLOPT_PROXY]);
+    }
 }
